@@ -1,4 +1,5 @@
 from tkinter import *
+from Enums import *
 
 class Board:
 
@@ -10,10 +11,11 @@ class Board:
         self.canvasHeight = 300
         self.columnHeight = self.canvasHeight / 3
         self.columnWidth = self.canvasWidth / 3
-        self.w = Canvas(master,
-                        width = self.canvasWidth,
-                        height = self.canvasHeight)
-        self.w.pack()
+        self.minimumSpace = 5
+        self.gameBoard = Canvas(master,
+                                width=self.canvasWidth,
+                                height=self.canvasHeight)
+        self.gameBoard.pack()
 
         y = int(self.columnHeight)
 
@@ -23,16 +25,39 @@ class Board:
 
     def drawParallelLines(self):
         y = int(self.columnHeight)
-        self.w.create_line(0, y, self.canvasWidth, y, fill="#476042")
-        self.w.create_line(0, y + self.columnHeight, self.canvasWidth, y + self.columnHeight, fill="#476042")
+        self.gameBoard.create_line(0, y, self.canvasWidth, y, fill="#476042")
+        self.gameBoard.create_line(0, y + self.columnHeight, self.canvasWidth, y + self.columnHeight, fill="#476042")
 
     def drawVerticalLines(self):
         y = int(0)
-        self.w.create_line(self.columnWidth, y, self.columnWidth, self.canvasHeight, fill="#476042")
-        self.w.create_line(2 * self.columnWidth, y, 2 * self.columnWidth, self.canvasHeight, fill="#476042")
+        self.gameBoard.create_line(self.columnWidth, y, self.columnWidth, self.canvasHeight, fill="#476042")
+        self.gameBoard.create_line(2 * self.columnWidth, y, 2 * self.columnWidth, self.canvasHeight, fill="#476042")
 
+    def drawCross(self, field):
+        startEndCoordinates = self.computeStartEndCoordinates(field)
+        self.gameBoard.create_line(startEndCoordinates[Coordinates.startX], startEndCoordinates[Coordinates.startY],
+                                   startEndCoordinates[Coordinates.endX], startEndCoordinates[Coordinates.endY])
+        self.gameBoard.create_line(startEndCoordinates[Coordinates.startX], startEndCoordinates[Coordinates.endY],
+                                   startEndCoordinates[Coordinates.endX], startEndCoordinates[Coordinates.startY])
+
+
+    def drawCircle(self, field):
+        startEndCoordinates = self.computeStartEndCoordinates(field)
+        self.gameBoard.create_oval(startEndCoordinates[Coordinates.startX], startEndCoordinates[Coordinates.startY],
+                                   startEndCoordinates[Coordinates.endX], startEndCoordinates[Coordinates.endY])
+
+    def computeStartEndCoordinates(self, field):
+        startEndCoordinates = [0, 0, 0, 0]
+        startEndCoordinates[Coordinates.startX] = field[0] * self.columnWidth + self.minimumSpace
+        startEndCoordinates[Coordinates.endX] = (field[0] + 1) * self.columnWidth - self.minimumSpace
+        startEndCoordinates[Coordinates.startY] = field[1] * self.columnHeight + self.minimumSpace
+        startEndCoordinates[Coordinates.endY] = (field[1] + 1) * self.columnHeight - self.minimumSpace
+
+        return startEndCoordinates
 
 
 newBoard = Board()
 newBoard.drawBaseBoard()
+newBoard.drawCircle([0, 2])
+newBoard.drawCross([1, 2])
 mainloop()
