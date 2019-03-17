@@ -1,29 +1,38 @@
 from tkinter import *
-master = Tk()
 
-canvas_width = 80
-canvas_height = 40
-columnHeight = 10
-w = Canvas(master,
-           width=canvas_width,
-           height=canvas_height)
-w.pack()
+class Board:
 
-y = int(canvas_height / 2)
+    def __init__(self):
 
-def drawBaseBoard():
-    drawParallelLines()
-    drawVerticalLines()
+        master = Tk()
+
+        self.canvasWidth = 300
+        self.canvasHeight = 300
+        self.columnHeight = self.canvasHeight / 3
+        self.columnWidth = self.canvasWidth / 3
+        self.w = Canvas(master,
+                        width = self.canvasWidth,
+                        height = self.canvasHeight)
+        self.w.pack()
+
+        y = int(self.columnHeight)
+
+    def drawBaseBoard(self):
+        self.drawParallelLines()
+        self.drawVerticalLines()
+
+    def drawParallelLines(self):
+        y = int(self.columnHeight)
+        self.w.create_line(0, y, self.canvasWidth, y, fill="#476042")
+        self.w.create_line(0, y + self.columnHeight, self.canvasWidth, y + self.columnHeight, fill="#476042")
+
+    def drawVerticalLines(self):
+        y = int(0)
+        self.w.create_line(self.columnWidth, y, self.columnWidth, self.canvasHeight, fill="#476042")
+        self.w.create_line(2 * self.columnWidth, y, 2 * self.columnWidth, self.canvasHeight, fill="#476042")
 
 
-def drawParallelLines() :
-    w.create_line(0, y, canvas_width, y, fill="#476042")
-    w.create_line(0, y + columnHeight, canvas_width, y + columnHeight, fill="#476042")
-    w.create_line(0, y + 2 * columnHeight, canvas_width, y + 2 * columnHeight, fill="#476042")
 
-def  drawVerticalLines():
-    w.create_line(columnHeight, y, canvas_width, y, fill="#476042")
-    w.create_line(0, y + columnHeight, columnHeight, canvas_height, fill="#476042")
-
-drawBaseBoard()
+newBoard = Board()
+newBoard.drawBaseBoard()
 mainloop()
