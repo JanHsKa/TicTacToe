@@ -9,14 +9,13 @@ class Board:
 
         self.canvasWidth = 300
         self.canvasHeight = 300
+        self.minimumSpace = 5
         self.columnHeight = self.canvasHeight / 3
         self.columnWidth = self.canvasWidth / 3
-        self.minimumSpace = 5
         self.gameBoard = Canvas(master,
                                 width=self.canvasWidth,
                                 height=self.canvasHeight)
         self.gameBoard.pack()
-
         y = int(self.columnHeight)
 
     def drawBaseBoard(self):

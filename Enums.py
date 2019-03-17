@@ -7,3 +7,8 @@ class Coordinates:
     startY = 2
     endY = 3
 
+
+class Figures:
+    cross = 0
+    circle = 1
+
