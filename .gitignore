@@ -1,0 +1,11 @@
+.idea/TicTacToe.iml
+.idea/misc.xml
+.idea/workspace.xml
+.vscode/launch.json
+.vscode/settings.json
+__pycache__/Player.cpython-37.pyc
+__pycache__/Enums.cpython-37.pyc
+__pycache__/AIPlayer.cpython-37.pyc
+.vscode/.ropeproject/objectdb
+.vscode/.ropeproject/config.py
+.idea/misc.xml

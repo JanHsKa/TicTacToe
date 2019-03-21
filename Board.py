@@ -3,7 +3,7 @@ from Enums import *
 
 class Board:
 
-    def __init__(self):
+    def __init__(self, canvasClickCallback):
 
         master = Tk()
 
@@ -15,8 +15,18 @@ class Board:
         self.gameBoard = Canvas(master,
                                 width=self.canvasWidth,
                                 height=self.canvasHeight)
-        self.gameBoard.pack()
+
+        self.gameBoard.bind("<Key>", self.key)
+        self.gameBoard.bind("<Button-1>", canvasClickCallback)
         y = int(self.columnHeight)
+        self.gameBoard.pack()
+
+    def key(self, event):
+        print ("pressed", repr(event.char))
+
+    def drawSigns(self, event):
+
+        print ("clicked at", event.x, event.y)
 
     def drawBaseBoard(self):
         self.drawParallelLines()
@@ -55,7 +65,7 @@ class Board:
         return startEndCoordinates
 
 
-newBoard = Board()
+newBoard = Board(lambda a : a)
 newBoard.drawBaseBoard()
 newBoard.drawCircle([0, 2])
 newBoard.drawCross([1, 2])
