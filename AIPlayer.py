@@ -1,9 +1,23 @@
-from Player import*
+from GameModel import*
 
 
-class AIPlayer(Player):
-    def __init__(self, name, figure):
-        super(AIPlayer, self).__init__(name, figure)
+class AIPlayer():
+    def __init__(self, figure, gameModel):
+        self.figure = figure
+        self.gameModel = gameModel
+        self.istActive = False
         print("AIPlayer")
-        print(self.figure)
+
+    def executeTurn(self):
+        pass
+
+    def findBestChoice(self):
+        for i in self.gameModel.freeFields:
+            self.calculateAllPosibilities(self.gameModel.freeFields.copy(), 
+            self.gameModel.playfield.copy(), i)
+
+    def calculateAllPosibilities(self, freeFields, playField, field):
+        pass
+
+    
 

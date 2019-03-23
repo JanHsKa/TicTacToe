@@ -9,3 +9,9 @@ __pycache__/AIPlayer.cpython-37.pyc
 .vscode/.ropeproject/objectdb
 .vscode/.ropeproject/config.py
 .idea/misc.xml
+__pycache__/Board.cpython-37.pyc
+__pycache__/GameModel.cpython-37.pyc
+__pycache__ (1)/Enums.cpython-37.pyc
+__pycache__ (1)/Player.cpython-37.pyc
+__pycache__ (1)/AIPlayer.cpython-37.pyc
+__pycache__/GameProcess.cpython-37.pyc

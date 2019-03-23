@@ -3,12 +3,12 @@ from Enums import *
 
 class Board:
 
-    def __init__(self, canvasClickCallback):
+    def __init__(self, canvasClickCallback, resetGame, width, height):
 
         master = Tk()
 
-        self.canvasWidth = 300
-        self.canvasHeight = 300
+        self.canvasWidth = width
+        self.canvasHeight = height
         self.minimumSpace = 5
         self.columnHeight = self.canvasHeight / 3
         self.columnWidth = self.canvasWidth / 3
@@ -18,17 +18,32 @@ class Board:
 
         self.gameBoard.bind("<Key>", self.key)
         self.gameBoard.bind("<Button-1>", canvasClickCallback)
-        y = int(self.columnHeight)
+        self.drawBaseBoard()
+        self.gameBoard.pack()
+
+        self.menubar = Menu(master)
+        self.menubar.add_command(label="Neues Spiel", command=resetGame)
+        master.config(menu = self.menubar)
+
+    def resetBoard(self):
+        self.gameBoard.delete("all")
+        self.drawBaseBoard()
         self.gameBoard.pack()
 
     def key(self, event):
         print ("pressed", repr(event.char))
 
-    def drawSigns(self, event):
-
-        print ("clicked at", event.x, event.y)
+    def drawSigns(self, field, player):
+        if player == Figures.circle:
+            self.drawCircle(field)
+        else:
+            self.drawCross(field)
 
     def drawBaseBoard(self):
+        print("DrawBaseBoard")
+        print(self.canvasHeight)
+        print(self.canvasWidth)
+
         self.drawParallelLines()
         self.drawVerticalLines()
 
@@ -65,8 +80,8 @@ class Board:
         return startEndCoordinates
 
 
-newBoard = Board(lambda a : a)
-newBoard.drawBaseBoard()
+""" newBoard = Board(lambda a : a, 300, 300)
+newBoard.resetBoard()
 newBoard.drawCircle([0, 2])
 newBoard.drawCross([1, 2])
-mainloop()
+mainloop() """
