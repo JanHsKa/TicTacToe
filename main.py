@@ -1,4 +1,4 @@
-from GameProcess import *
+from GameController import *
 
 controller = GameController()
 controller.startNewGame()

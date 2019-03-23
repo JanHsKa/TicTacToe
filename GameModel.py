@@ -9,14 +9,17 @@ class GameModel:
         self.playFieldWidth = 300
         self.playfieldHeight = 300
         self.currentField = [0, 0]
+        self.turnCount = 0
         self.gameOver = False
 
 
-    def resetGame(self):
+    def resetGame(self, currentPlayer):
         self.gameOver = False
+        self.currentPlayer = currentPlayer
         self.freeFields = self.getNewFreeField()
         self.playfield = self.getNewPlayfield()
         self.currentField = [0, 0]
+        self.turnCount = 0
 
     def changeCurrentPlayer(self):
         self.currentPlayer = (self.currentPlayer + 1) % 2
@@ -63,6 +66,7 @@ class GameModel:
         self.playfield[field[0]][field[1]] = self.currentPlayer
         self.freeFields.remove(field)
         self.currentField = field
+        self.turnCount += 1
 
     def executePlayerTurn(self, x, y):
         field = self.getClickedField(x, y)
